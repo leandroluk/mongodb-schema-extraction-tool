@@ -172,7 +172,7 @@ export class SchemaExtractionTool {
     for (const collection of collections) {
       const collectionName = collection.name;
       schema[collectionName] = await this.getSchema(collectionName);
-      this.options.logger?.info(`"${collectionName}" generated.`);
+      this.options.logger?.info(`collection "${collectionName}" generated.`);
     }
     return schema;
   }

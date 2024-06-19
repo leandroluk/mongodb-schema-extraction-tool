@@ -1,0 +1,29 @@
+{
+  "name": "@leandroluk/mongodb-schema-extraction-tool",
+  "displayName": "MongoDB Schema Extraction tool",
+  "version": "1.0.0",
+  "description": "Tool created to Access a database on mongodb and recursively extract the structure of db, looking for all fields in documents",
+  "main": "dist/runner.ts",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "start": "ts-node src/runner.ts",
+    "dev": "nodemon --watch src --ext ts --exec \"ts-node src/runner.ts\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "20.12.7",
+    "@types/winston": "^2.4.4",
+    "dotenv": "^16.4.5",
+    "gts": "^5.3.1",
+    "nodemon": "3.1.3",
+    "rimraf": "^5.0.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "mongodb": "^6.7.0",
+    "winston": "^3.13.0"
+  }
+}

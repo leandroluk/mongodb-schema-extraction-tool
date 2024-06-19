@@ -137,11 +137,17 @@ async function main() {
   const schema = await tool.generateSchemaForAllCollections();
   const flattened = tool.flattenSchema(schema);
 
+  const tempDir = path.resolve(process.cwd(), '.tmp');
+  const encoding = 'utf-8';
+
+  if (!fs.existsSync(tempDir)) {
+    fs.mkdirSync(tempDir);
+  }
+
   const jsonSchema = JSON.stringify(schema, null, 2);
   const jsonFlattened = JSON.stringify(flattened, null, 2);
-  const jsonSchemaPath = path.resolve(process.cwd(), `${process.env.PREFIX_FILE}-schema.json`);
-  const jsonFlattenedPath = path.resolve(process.cwd(), `${process.env.PREFIX_FILE}-flattened.json`);
-  const encoding = 'utf-8';
+  const jsonSchemaPath = path.resolve(tempDir, `${process.env.PREFIX_FILE}-schema.json`);
+  const jsonFlattenedPath = path.resolve(tempDir, `${process.env.PREFIX_FILE}-flattened.json`);
 
   fs.writeFileSync(jsonSchemaPath, jsonSchema, encoding);
   fs.writeFileSync(jsonFlattenedPath, jsonFlattened, encoding);
@@ -150,11 +156,5 @@ async function main() {
 }
 
 main()
-  .then(() => {
-    console.log('finished');
-    process.exit(0);
-  })
-  .catch(e => {
-    console.error(e);
-    process.exit(1);
-  });
+  .then(() => process.exit(0))
+  .catch(e => [console.error(e), process.exit(1)]);
